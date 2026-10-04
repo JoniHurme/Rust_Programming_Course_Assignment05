@@ -1,21 +1,42 @@
+use crate::parcel::ParcelStatus;
+use crate::parcel::ParcelStatus::Delivered;
+
 mod parcel;
 
 fn main() {
 
 
+
     let package1 = parcel::ParcelStatus::Preparing;
-
-    parcel::status_message(package1);
-
     let package2 = parcel::ParcelStatus::InTransit {
         courier: "DHL".to_string()
     };
+    let package3 = parcel::ParcelStatus::Delivered {
+        recipient: "Front Desk".to_string()
+    };
+    let package4 = parcel::ParcelStatus::Returned {
+        reason: "the goods were broken.".to_string()
+    };
 
-    parcel::status_message(package2);
+    let package_array = [package1, package2, package3, package4];
 
-    parcel::print_delivery_note(Option::Some("Sometghin"))
+    for package in package_array {
+        println!("{}", parcel::status_message(package));
+    }
 
-    // println!("Package 1 is now in a state of:");
+    parcel::print_delivery_note(
+        Option::Some("Delivered")
+    );
+    // Should output "The note is none"
+    parcel::print_delivery_note(
+        Option::None
+    );
 
-    // println!("Hello, world!");
+    parcel::announce_delivery(
+        &Delivered { recipient: "Front".to_string() }
+    );
+
+    parcel::create_receipt(
+        ParcelStatus::Delivered {recipient:"Front Desk".to_string()}
+    );
 }
