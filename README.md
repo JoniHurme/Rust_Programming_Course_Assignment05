@@ -11,3 +11,7 @@ that I had `Some()` and `note` the wrong way around.
 
 After reading chapter 6.3 from the rust book and watching the videos, I asked LumoAI to explain if let and let else clauses.
 I gained valuable insight on how they actually work and the ordering of values in each pattern.
+
+
+After reading the ownership chapter of the Rust Book multiple times I came to the conclusion 
+that `fn status_message` takes ownership of the variable it is passed and therefore the same variable can NOT be used again. I confirmed this with LumoAI as well.
